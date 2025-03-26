@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "spdlog/spdlog.h"
+
 using namespace std;
 
 namespace claudia_calc {
