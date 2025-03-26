@@ -34,6 +34,9 @@ inline char to_char(reg_name rn) { return static_cast<char>(rn + 'a'); }
  * calculator functions
  */
 
+
+double registers[4] = {0, 0, 0, 0};  // registers for A, B, C, D
+
 inline void print_line() { cout << std::string(MENU_WIDTH, '-') << endl; }
 
 inline void print_title(string const title) { cout << fmt::format("{:^{}}", title, MENU_WIDTH) << endl; }
