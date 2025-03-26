@@ -57,6 +57,14 @@ void print_menu() {
     print_line();
 }
 
+//Added print_registers() for printing the values in the Array
+void print_registers() { 
+    cout << "Registers:" << endl;
+    cout << "A: " << registers[0] << ", B: " << registers[1] 
+         << ", C: " << registers[2] << ", D: " << registers[3] << endl;
+}
+
+
 void execute(string const cmd) {
     // validate command size
     if (cmd.size() == 0) {
