@@ -85,18 +85,6 @@ void execute(string const cmd) {
     }
 
     switch (cmd_ch) {
-        case 'a':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case 'b':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case 'c':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case 'd':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
         case '+': {
             // ask for left and right registers
             cout << "Enter the left register: ";
