@@ -74,6 +74,15 @@ void execute(string const cmd) {
     // lower annd get first char of command
     char const cmd_ch = std::tolower(cmd[0]);
 
+    if (is_register(cmd_ch)) {
+        cout << "Enter value for a register " << cmd_ch << ": ";
+        double value;
+        cin >> value;
+        registers[to_reg_name(cmd_ch)] = value;
+        spdlog::info("Set {} = {}", cmd_ch, value);
+        return;
+    }
+
     switch (cmd_ch) {
         case 'a':
             spdlog::error("cmd={} not implemented", cmd_ch);
