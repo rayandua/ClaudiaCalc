@@ -139,31 +139,64 @@ void execute(string const cmd) {
             }
             break;
         }
-        case '*':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+        case '*': {
+            // ask for left and right registers
+            cout << "Enter the left register: ";
+            char left_reg;
+            cin >> left_reg;
+            cout << "Enter the right register: ";
+            char right_reg;
+            cin >> right_reg;
+
+           
+            if (is_register(left_reg) && is_register(right_reg)) {
+                double left_val = registers[to_reg_name(left_reg)];
+                double right_val = registers[to_reg_name(right_reg)];
+                registers[0] = left_val * right_val;
+                spdlog::info("A = {} * {} -> A = {}", left_val, right_val, registers[0]);
+                cout << "Result: A = " << registers[0] << endl;
+            } else {
+                spdlog::error("Invalid register input");
+            }
             break;
-        case '/':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+        }
+        case '/': {
+            // ask for left and right registers
+            cout << "Enter the left register: ";
+            char left_reg;
+            cin >> left_reg;
+            cout << "Enter the right register: ";
+            char right_reg;
+            cin >> right_reg;
+
+            
+            if (is_register(left_reg) && is_register(right_reg)) {
+                double left_val = registers[to_reg_name(left_reg)];
+                double right_val = registers[to_reg_name(right_reg)];
+                if (right_val != 0) {
+                    registers[0] = left_val / right_val;
+                    spdlog::info("A = {} / {} -> A = {}", left_val, right_val, registers[0]);
+                    cout << "Result: A = " << registers[0] << endl;
+                } else {
+                    spdlog::error("Division by zero is not allowed");
+                }
+            } else {
+                spdlog::error("Invalid register input");
+            }
             break;
-        case '1':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case '2':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case '3':
-            spdlog::error("cmd={} not implemented", cmd_ch);
-            break;
-        case '4':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+        }
+        case '1': case '2': case '3': case '4':
+            registers[cmd_ch - '1'] = 0;
+            spdlog::info("Cleared register {}", cmd_ch - '1' + 'A');
             break;
         case 'm':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+            print_menu();
             break;
         case 'p':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+            print_registers();
             break;
         case 'q':
+            spdlog::info("Exiting ClaudiaCalc...");
             break;
         default:
             spdlog::error("{} is an unknown command", cmd_ch);
