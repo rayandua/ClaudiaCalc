@@ -74,6 +74,7 @@ void execute(string const cmd) {
     // lower annd get first char of command
     char const cmd_ch = std::tolower(cmd[0]);
 
+    // defines the value of a b c d
     if (is_register(cmd_ch)) {
         cout << "Enter value for a register " << cmd_ch << ": ";
         double value;
@@ -96,9 +97,27 @@ void execute(string const cmd) {
         case 'd':
             spdlog::error("cmd={} not implemented", cmd_ch);
             break;
-        case '+':
-            spdlog::error("cmd={} not implemented", cmd_ch);
+        case '+': {
+            // ask for left and right registers
+            cout << "Enter the left register: ";
+            char left_reg;
+            cin >> left_reg;
+            cout << "Enter the right register: ";
+            char right_reg;
+            cin >> right_reg;
+
+            // making sure valid register input
+            if (is_register(left_reg) && is_register(right_reg)) {
+                double left_val = registers[to_reg_name(left_reg)];
+                double right_val = registers[to_reg_name(right_reg)];
+                registers[0] = left_val + right_val;
+                spdlog::info("A = {} + {} -> A = {}", left_val, right_val, registers[0]);
+                cout << "Result: A = " << registers[0] << endl;
+            } else {
+                spdlog::error("Invalid register input");
+            }
             break;
+        }
         case '-':
             spdlog::error("cmd={} not implemented", cmd_ch);
             break;
